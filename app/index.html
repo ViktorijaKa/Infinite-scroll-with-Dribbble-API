@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            let page = 1;
+            $(document).ready(function() {
+                loadMore(page);
+            });
+            $(window).scroll(function() {
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    page++;
+                    loadMore(page);
+                    return page;
+                }
+            });
+
+            function loadMore(page) {
+                $.getJSON("https://api.dribbble.com/v1/shots/?timeframe=year&per_page=40&page=" + page + "&access_token=41d7a0872de52ee59201ac7dfc55a5f7e50475f4fa32e407e2d7539ab1e2483e&callback=?",
+                    function(resp) {
+                        $(".loading").bind("ajaxStart", function() {
+                            $(this).show();
+                        }).bind("ajaxStop", function() {
+                            $(this).hide();
+                        });
+                        $.each(resp.data.reverse(), function(i, val) {
+                            $('.main-list').append(
+                                '<li class="shot-tile"><img src="' + val.images.normal +
+                                '" /> <div class="div-on-top"><div class="title">' + val.title + '</div>' + '<div class="author-name">' + val.user.name + '</div>' +
+                                '<div class="go-to-original"><a href="' +
+                                val.html_url + '">Favorite</a></div></div></li>'
+                            );
+                        });
+
+                    });
+            };
+        });
+    </script>
+</head>
+
+<body>
+    <ul class="main-list"></ul>
+    <div class="loading"></div>
+</body>
+
+</html>

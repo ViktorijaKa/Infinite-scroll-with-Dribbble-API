@@ -1,0 +1,185 @@
+$transition: 0.2s ease-in-out;
+$favorite-border: 1px solid white;
+@keyframes loaderSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loading {
+    border: 16px solid rgba(0,0,0,0.2);
+    border-top: 16px solid white;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: loaderSpin 2s linear infinite;
+    position: relative;
+    left: 45%;
+    margin-bottom: 10%;
+}
+body {
+    background-color: #e8e8e8;
+    font-family: "Arial", Sans;
+}
+li {
+    list-style: none;
+    position: relative;
+    margin-bottom: 5%;
+    text-align: center;
+};
+.main-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+@media only screen and (min-width:769px) {
+    li {
+        img {
+            border-radius: 5px;
+            -webkit-filter: blur(0);
+            filter: blur(0);
+            -webkit-transition: $transition;
+            transition: $transition;
+        }
+        &:hover {
+            .div-on-top {
+                background: rgba(0,0,0,0.2);
+                visibility: visible;
+            }
+            img {
+                -webkit-filter: blur(1px);
+                filter: blur(1px);
+            }
+        }
+    }
+    .div-on-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 99%;
+        border-radius: 2%;
+        visibility: hidden;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+    }
+    .title {
+        margin-top: 25%;
+        font-size: 30px;
+        font-weight: 400;
+    }
+    .author-name {
+        font-size: 15px;
+        border-top: 1px solid white;
+        padding-top: 1%;
+        margin-bottom: 14%;
+        font-style: italic;
+    }
+    .go-to-original {
+        position: relative;
+        text-decoration: none;
+        color: white;
+        padding: 5% 15%;
+        border: $favorite-border;
+        border-radius: 164px;
+        margin-bottom: 6%;
+    }
+    a {
+        position: absolute;
+        left: 29%;
+        top: 29%;
+        color: white;
+        text-decoration: none;
+    }
+}
+@media only screen and (min-width:321px) and (max-width:768px) {
+    .main-list {
+        width: 100%;
+        padding: 0;
+    }
+    .div-on-top {
+        height: 18%;
+        width: 100%;
+        visibility: visible;
+        background: rgba(0,0,0,0.2);
+        position: absolute;
+        top: 78%;
+        left: 0;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 2%;
+        align-items: center;
+    }
+    .go-to-original {
+        margin-right: 5%;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 11% 18%;
+        margin-bottom: 3%;
+        border-radius: 164px;
+        border: $favorite-border;
+    }
+    .author-name {
+        visibility: hidden;
+    }
+    .loading {
+        left: 37%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .main-list {
+        width: 100%;
+        padding: 0;
+    }
+    img {
+        width: 95%;
+    }
+    .author-name {
+        visibility: hidden;
+        width: 0;
+    }
+    .title {
+        visibility: hidden;
+        width: 0;
+    }
+    .go-to-original {
+        width: 100%;
+        position: relative;
+        min-height: 50px;
+        max-height: 50px;
+    }
+    a {
+        width: 100%;
+        color: white;
+        text-decoration: none;
+        padding: 4%;
+        border: $favorite-border;
+        border-radius: 164px;
+        background: rgba(0,0,0,0.2);
+    }
+    .div-on-top {
+        display: flex;
+        width: 95%;
+        align-self: center;
+        margin-left: 7px;
+        position: absolute;
+        top: 76%;
+        left: 29%;
+    }
+    .loading {
+        height: 50px;
+        width: 50px;
+        left: 40%;
+        border: 5px solid rgba(0,0,0,0.2);
+        border-top: 5px solid white;
+    }
+}
